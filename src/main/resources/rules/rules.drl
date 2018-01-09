@@ -1,0 +1,13 @@
+import com.test.springboot.domain.Fact;
+import com.test.springboot.errors.RuleViolation;
+import com.test.springboot.errors.RuleViolations;
+
+global com.test.springboot.errors.RuleViolations violations;
+dialect  "mvel"
+
+rule "Calculate Taxi Fare - Scenario 1"
+    when
+        factObject:Fact(age < 18 && employeeNumber > 0);
+    then
+       	violations.addViolation(new RuleViolation("1", "Employee is a minor"));
+end
